@@ -1,0 +1,49 @@
+.header{
+    display: flex;
+    border: 1px solid black;
+    /* TO get items between horizontal items */
+    justify-content: space-between;
+}
+
+.logo{
+    width: 50px;
+}
+
+.nav-items > ul {
+    /* TO remove bullet points */
+    list-style-type: none;
+    /* Display flex will make items align horizontal */
+    display: flex;
+    
+}
+
+.nav-items > ul > li {
+    padding: 10px;
+}
+
+.res-card {
+    width:200px;
+    /* height: 300px; */
+    margin: 5px;
+}
+
+.res-card:hover{
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+
+.search {
+    padding: 10px;
+}
+
+.res-logo {
+    width: 200px;
+    height: 100px;
+}
+
+.res-container{
+    display: flex;
+    /* To wrap all our flex  items adjust vertically and horiontally itself */
+    flex-wrap: wrap;
+}
