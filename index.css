@@ -47,3 +47,7 @@
     /* To wrap all our flex  items adjust vertically and horiontally itself */
     flex-wrap: wrap;
 }
+
+.filter-btn{
+    margin:10px;
+}
