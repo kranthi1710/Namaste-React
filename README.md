@@ -51,12 +51,20 @@ ex:const [variable]=useState([]);//Inside paranthesis of useState, we have given
 ex: let [listOfRestaurants]=useState([]);--->same as let listOfRestaurants=[];
 If we want to modify this above variable, we need to do it by a function which has to be passed as second argument to the useState variable---like below:
 let [listOfRestaurants,setListOfRestaurants]=useState([]);
+--NOTE : UseState used to create local state variables inside your functional components.
+--NOTE : Always call useState in functional component itself, not out side of it like after imports and before component declaration.
+--NOTE : Always try to call useState at top inside functional Component as JS is a Synchronous single threaded language. the code will run line by line from top
+--NOTE : Never create useState in IF ELSE block and in any conditions(while etc) and not inside FOR loops and inside functions i functional component. This will create inconsistencies
 
 ->whenever the state variable updates, React re-renders the component.
 
 UseEffect:
-This hook will be invoked after component rendering.
+This hook will be invoked/called everytime on component rendering.
 It has two arguments namely callback function and a dependency array
+Dependency array changes the behaviour of this :
+-If no Dependency Array---UseEffect is called on every render
+-If Dependency array is empty----Then UseEffect is called on initial render and just once when component is rendered for first time
+-If we keep some Dependency(ex:btnNameReact variable) in Dependency Array---useEffect is called everytime btnNameReact is updated
 
 Fetch()
 It is the super power given to us by Browsers. JS Engine will contain this.It will fetch data from API.
@@ -70,3 +78,31 @@ Above we use await again for the promise to resolve and get data.
 
 If we use swiggy API in our localhost,we will get CORS issue.
 Our Browser is not allowing us to call Swiggy's API from localhost(from one origin to another origin). Origin Mismatch--> Browser will block that API call---> CORS issue
+
+Shimmer UI:
+Until we load actual page, We will show fake page instead of using spinner icon
+
+React Fiber
+It is the new Reconciliation process to effeciently manipulate the DOM. It will find out the Difference between two Virtual DOMs(current and previous) and updates the Actual DOM only when a portion is required
+
+React Router:
+TO create Routing configuration in our component:
+import { createBrowserRouter } from "react-router-dom";
+Configuration means some information that will define what will happen on a specific route.
+Ex: what will happen if I call '/about' route.
+createBrowserRouter---takes in some configuration(list of objects). Each and every object defines a different path and what should happen on that path
+
+How/where to provide this configuration and render it:
+We have RouterPovider component given by "react-router-dom"---It will actually provide this routing configuration to our App
+
+How to create links that will navigate us to respective page:
+-DOn't use anchor tags for creating that links, it will refresh total page
+-Use Link Component provided by React-router-dom, it will not refresh page and Navigate to respective page.
+import {Link} from "react-router-dom";
+
+# Two types of Routing we will have in web applications
+
+Client side routing---ONly components getting routed and no API call to backend
+Server side routing---
+
+Single Page Application: It is one page and only components are getting interchanged via client side routing.

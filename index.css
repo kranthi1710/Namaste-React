@@ -48,6 +48,29 @@
     flex-wrap: wrap;
 }
 
-.filter-btn{
+
+
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card {
     margin:10px;
+    width:200px;
+    height: 300px;
+    background-color: #f0f0f0;
+}
+
+.btn-login {
+    padding: 0px 20px;
+}
+
+.filter {
+    display: flex;
+    margin:10px;
+}
+
+.filter-btn {
+    margin-left: 10px;
 }
