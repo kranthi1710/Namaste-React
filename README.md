@@ -106,3 +106,31 @@ Client side routing---ONly components getting routed and no API call to backend
 Server side routing---
 
 Single Page Application: It is one page and only components are getting interchanged via client side routing.
+
+Link--From react-router-dom--->Link is a component and behind scenes, it is using anchor tag.
+Link is a wrapper over anchor tag. WHen you make "home" as link, then react-router-dom will keep a track that this "home" is a link and you dont have to refresh the page
+
+# Class based components:
+
+Mounting:
+For example, if we say invoking a functional component means loading or mounting that function on to the webpage
+
+-Loading a class based component onto the webpage means we are creating instance of this class and giving it props in constructor.
+Whenever we are creating the instance of the class, constructor is called and this is the best place to receive props and it is best place to create state variables
+
+# class based components
+
+- whenever a class based component is instantiated, constructor is called first and after that render method
+
+componentDidMount() is called when the component has mounted/loaded on screen.
+why:
+It is used to make API calls.(same like useEffect in functional component)
+React wants to quickly render it and then make the API call and fill the data
+LOAD->RENDER->API CALL->
+
+-If we hae two child components in render method of class based component. while eecuting both child components one by one, React will batch the render phase and commit phase for these two childs. So first render phase will happen for both child components and then commit phase will happen for both.
+
+-Render phase--constructor and render() methods are called
+DOM and Refs and then componentDidUpdate() is called.
+
+--DOM manipulation is expensive thing when we are loading the component

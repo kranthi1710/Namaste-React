@@ -1,6 +1,7 @@
 import RestaurantContainer from "./RestaurantContainer";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 const Body = () => {
   // State variable - Super powerful variable
   //Whenever State variable updates, React triggers a reconciliation cycle(re-renders the component)
@@ -75,7 +76,13 @@ const Body = () => {
       <div className="res-container">
         {/* Here we are returnig some piece of JSX in () */}
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantContainer key={restaurant.data.id} resObj={restaurant} />
+          // WHen we are using two sub child components one inside another, Key should be present in parent component
+          <Link
+            key={restaurant.data.id}
+            to={"/restaurants/" + restaurant.data.id}
+          >
+            <RestaurantContainer resObj={restaurant} />
+          </Link>
         ))}
       </div>
     </>
