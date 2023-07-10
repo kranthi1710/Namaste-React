@@ -2,6 +2,8 @@ import RestaurantContainer from "./RestaurantContainer";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+
 const Body = () => {
   // State variable - Super powerful variable
   //Whenever State variable updates, React triggers a reconciliation cycle(re-renders the component)
@@ -25,6 +27,11 @@ const Body = () => {
     setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   };
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return <h1>You are offline, Turn on your internet</h1>;
+  }
 
   //COnditional Rendering---Rendering the component(ex:Shimmer) with a condition(ex:listOfRestaurants.length === 0)
   // if (listOfRestaurants.length === 0) {

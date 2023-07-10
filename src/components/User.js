@@ -6,6 +6,18 @@ const User = ({ name }) => {
   const [count2, setCount2] = useState(0);
   //Above we have done Destructure on the fly for props
   //Functional component is a function that return a piece of JSX
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log("namaste React");
+    }, 1000);
+    //We will do cleanup
+    return () => {
+      //called when unmounting the component
+      clearInterval(timer);
+      console.log("useEffect Return");
+    };
+  }, [count]);
   return (
     <div className="user-card">
       <h1>Count - {count}</h1>

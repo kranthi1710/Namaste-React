@@ -54,7 +54,7 @@ let [listOfRestaurants,setListOfRestaurants]=useState([]);
 --NOTE : UseState used to create local state variables inside your functional components.
 --NOTE : Always call useState in functional component itself, not out side of it like after imports and before component declaration.
 --NOTE : Always try to call useState at top inside functional Component as JS is a Synchronous single threaded language. the code will run line by line from top
---NOTE : Never create useState in IF ELSE block and in any conditions(while etc) and not inside FOR loops and inside functions i functional component. This will create inconsistencies
+--NOTE : Never create useState in IF ELSE block and in any conditions(while etc) and not inside FOR loops and inside functions in functional component. This will create inconsistencies
 
 ->whenever the state variable updates, React re-renders the component.
 
@@ -69,10 +69,10 @@ Dependency array changes the behaviour of this :
 Fetch()
 It is the super power given to us by Browsers. JS Engine will contain this.It will fetch data from API.
 Fetch will return a promise. To resolve a promise, we will use .then and for handling errors, we will use .catch
-Or we can use asyn and await also for resolve promise.
+Or we can use async and await also for resolving promise.
 
 Make the function async and await to data to come. This will resolve promise.
-Once we get data, we have to conert data to JSON using .json() method.
+Once we get data, we have to convert data to JSON using .json() method.
 const json = await data.json();
 Above we use await again for the promise to resolve and get data.
 
@@ -83,7 +83,7 @@ Shimmer UI:
 Until we load actual page, We will show fake page instead of using spinner icon
 
 React Fiber
-It is the new Reconciliation process to effeciently manipulate the DOM. It will find out the Difference between two Virtual DOMs(current and previous) and updates the Actual DOM only when a portion is required
+It is the new Reconciliation process to efficiently manipulate the DOM. It will find out the Difference between two Virtual DOMs(current and previous) and updates the Actual DOM only when a portion is required
 
 React Router:
 TO create Routing configuration in our component:
@@ -126,11 +126,59 @@ componentDidMount() is called when the component has mounted/loaded on screen.
 why:
 It is used to make API calls.(same like useEffect in functional component)
 React wants to quickly render it and then make the API call and fill the data
-LOAD->RENDER->API CALL->
+LOAD->RENDER->API CALL->re-render
 
--If we hae two child components in render method of class based component. while eecuting both child components one by one, React will batch the render phase and commit phase for these two childs. So first render phase will happen for both child components and then commit phase will happen for both.
+-If we have two child components in render method of class based component. while executing both child components one by one, React will batch the render phase and commit phase for these two childs. So first render phase will happen for both child components and then commit phase will happen for both.
 
 -Render phase--constructor and render() methods are called
 DOM and Refs and then componentDidUpdate() is called.
 
---DOM manipulation is expensive thing when we are loading the component
+--DOM manipulation is expensive thing when we are loading the component, it takes lot of time, so React want to batch the render.
+--When React is rendering in Rendering phase, React will trigger Reconciliation process. Everything in Render phase is happening in Virtual DOM. React will find difference. When it trys to update the DOM, it will find out all the Children, batch the render phase(This phase is faster than Commit phase) and render all children and then commit phase(batched children) will happen. This is why React is fast by optimizing the performance of App
+
+<!--
+-Parent Constructor
+-Parent render
+
+    --FIrst Constructor
+    --First render
+
+    --second constructor
+    --second render
+
+    <DOM Updated -- IN SINGLE BATCH>
+
+    -FIrst ComponentDidMOunt
+    -Second COmponentDidMount
+
+- Parent componentDidMount
+ -->
+
+we have to do cleanup activities like clearIntervals of setIntervals in componentWillUnmount
+
+UseEffect is not equal to componentDidMount as there are below differences:
+useEffect is not using componentDidMount behind the scenes.
+IMP: After first render, componentDidMount is called but after every subsequent render, componentDidUpdate is called
+
+IMP: but for useEffect. find below points
+This hook will be invoked/called everytime on component rendering.
+It has two arguments namely callback function and a dependency array
+Dependency array changes the behaviour of this :
+-If no Dependency Array---UseEffect is called on every render
+-If Dependency array is empty----Then UseEffect is called on initial render and just once when component is rendered for first time
+-If we keep some Dependency(ex:btnNameReact variable) in Dependency Array---useEffect is called everytime btnNameReact is updated
+
+# Optimizing Performance session
+
+Single Responsibility Principle:
+Suppose if we have a function or a class or any single responsible identity of ur code, that should have a single resposibility.
+Ex:Like Header responsibility is just creating header
+Advantages: Reusability, maintainable, testable
+
+MODULARITY---Means you break down the code into differeent small components/modules. so that your code becomes more maintainable and testable.
+
+Hooks are Utility or normal JS functions
+
+# Custom hooks
+
+We will take some resposibilty from a component and extract it inside a hook and insert this hook into our component, so that our component becomes more readable

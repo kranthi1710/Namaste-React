@@ -1,13 +1,25 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import respList from "./utils/mock-data";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./components/About";
+//import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+
+// Chunking
+// Code splitting
+// Dynamic loading
+// lazy loading
+// On Demand loading
+
+// lazy is named import from react, It takes a callback function. This callback function takes import function which takes path of lazy loaded bundle/component/module.
+// In large apps, we have thousands of files, we will make them into smaller bundles. THis process is known as chuncking/code splitting/dynamic bundling/dynamic loading/lazy loading/on demand loading
+
+// LOgical separation of bundles----> A bundle should have enough code for a feature.In makeMyTrip app, we can make a bundle for flights feature, Hotels feature etc.
+const About = lazy(() => import("./components/About"));
 
 // why we will use functions in our program---so that we can reuse
 
@@ -36,7 +48,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback="Loading...">
+            <About />
+          </Suspense>
+        ),
         errorElement: <Error />,
       },
       {

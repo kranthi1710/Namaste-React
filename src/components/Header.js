@@ -1,6 +1,7 @@
 import { LOGO_URL } from "../utils/constants";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 // As above Logo_url is named export, we need to keep in curly braces while importing
 
 const Header = (props) => {
@@ -14,12 +15,17 @@ const Header = (props) => {
   // Total component gets re-rendered but only updated values gets re-rendered on that re-render but not other things like LOgo
   const [btnNameReact, setBtnNameReact] = useState("Login");
 
+  const onlineStatus = useOnlineStatus();
   return (
     <div className="header">
       {/* As logo_url is javascript variable, we need to keep it in curly braces */}
       <img className="logo" src={LOGO_URL} />
       <div className="nav-items" style={props.styleCar}>
         <ul>
+          <li>
+            {/* To get Emoji's windows + . */}
+            Online Status : {onlineStatus === true ? "✅" : "🔴"}
+          </li>
           <li>
             <Link to="/">Home</Link>
           </li>
